@@ -1,0 +1,91 @@
+﻿.navbar-inverse {
+    background-color: #215dae;
+    border: 0;
+    color: #ffffff;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    font-size: 1.5rem;
+    line-height: 1.428571429;
+    color: #495057;
+    font-weight: 400;
+    background-color: #fff;
+}
+
+.photoContainer {
+    display: flex;
+    justify-content: space-between;
+    height: 100%;
+    width: 100%;
+    list-style: none;
+    padding: 30px;
+}
+
+#footerSite {
+    border-top: 0.5px solid #cecccc;
+    text-align: center;
+    padding: 20px;
+    color: #808080;
+    font-weight: 600;
+    margin: 0;
+    width: 100%;
+}
+
+.photoContainer ul {
+    text-align: center;
+}
+
+.photoContainer li {
+    padding: 20px;
+}
+
+
+.thanksPage{
+    padding: 100px;
+    text-align: center;
+    vertical-align: middle;
+    font-weight: 600;
+    font-size: 20px;
+    background-color: #7ddea8;
+    color: #495057;
+}
+
+.img-responsive {
+    border: 0.5px solid #cecccc;
+    margin: 0px;
+}
+
+.container .jumbotron {
+    padding: 0;
+    margin: 0px;
+}
+
+.navbar-inverse .navbar-nav > li > a {
+    color: #fff;
+}
+
+    .navbar-inverse .navbar-nav > li > a:hover {
+        color: #17da2b;
+    }
+
+.navbar-inverse .navbar-brand {
+    color: #fff;
+    font-weight: 600;
+}
+
+.links {
+    display: flex;
+    list-style: none;
+    justify-content: space-between;
+    height: 100%;
+    width: 400px;
+    padding: 5px;
+}
+
+
+@media screen and (max-width: 468px) {
+    .photoContainer {
+        display: block;
+    }
+}

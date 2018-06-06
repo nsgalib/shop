@@ -1,0 +1,17 @@
+﻿@model Store.Models.Admin
+
+<ul class="nav navbar-nav navbar-right">
+    @{
+        if (Session["Name"] == null)
+        {
+            <li>@Html.ActionLink("Admin", "Index", "Admin")</li>
+        }
+        else
+        {
+            <li>
+                @Html.ActionLink("Hello " + Session["Name"] + " !", "About", "Home")
+            </li>
+            <li>@Html.ActionLink("Log off", "Logout", "Admin")</li>
+        }
+    }
+</ul>

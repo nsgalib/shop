@@ -50,6 +50,12 @@
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -190,20 +196,69 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\BasketController.cs" />
+    <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\OrdersController.cs" />
+    <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="DAL\StoreContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201805312152339_AddBasketLine.cs" />
+    <Compile Include="Migrations\201805312152339_AddBasketLine.Designer.cs">
+      <DependentUpon>201805312152339_AddBasketLine.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806011025133_addorders.cs" />
+    <Compile Include="Migrations\201806011025133_addorders.Designer.cs">
+      <DependentUpon>201806011025133_addorders.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806011122225_updateorders.cs" />
+    <Compile Include="Migrations\201806011122225_updateorders.Designer.cs">
+      <DependentUpon>201806011122225_updateorders.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806011340553_updatecategory.cs" />
+    <Compile Include="Migrations\201806011340553_updatecategory.Designer.cs">
+      <DependentUpon>201806011340553_updatecategory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806011344090_updateproduct.cs" />
+    <Compile Include="Migrations\201806011344090_updateproduct.Designer.cs">
+      <DependentUpon>201806011344090_updateproduct.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806061019066_addadmin.cs" />
+    <Compile Include="Migrations\201806061019066_addadmin.Designer.cs">
+      <DependentUpon>201806061019066_addadmin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806061213134_updateadmin.cs" />
+    <Compile Include="Migrations\201806061213134_updateadmin.Designer.cs">
+      <DependentUpon>201806061213134_updateadmin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Admin.cs" />
+    <Compile Include="Models\Basket.cs" />
+    <Compile Include="Models\Category.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\BasketLine.cs" />
+    <Compile Include="Models\Order.cs" />
+    <Compile Include="Models\OrderLine.cs" />
+    <Compile Include="Models\Product.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\BasketSummaryViewModel.cs" />
+    <Compile Include="ViewModels\BasketViewModel.cs" />
+    <Compile Include="ViewModels\ProductIndexViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bell-peppers.jpg" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\myCSS.css" />
+    <Content Include="Content\PagedList.css" />
+    <Content Include="Content\project-logo.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -213,6 +268,7 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -224,7 +280,10 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="siteIcon.ico" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -258,6 +317,25 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Categories\Create.cshtml" />
+    <Content Include="Views\Categories\Delete.cshtml" />
+    <Content Include="Views\Categories\Details.cshtml" />
+    <Content Include="Views\Categories\Edit.cshtml" />
+    <Content Include="Views\Categories\Index.cshtml" />
+    <Content Include="Views\Products\Create.cshtml" />
+    <Content Include="Views\Products\Delete.cshtml" />
+    <Content Include="Views\Products\Details.cshtml" />
+    <Content Include="Views\Products\Edit.cshtml" />
+    <Content Include="Views\Products\Index.cshtml" />
+    <Content Include="Views\Basket\Index.cshtml" />
+    <Content Include="Views\Basket\Summary.cshtml" />
+    <Content Include="Views\Orders\Review.cshtml" />
+    <Content Include="Views\Orders\Delete.cshtml" />
+    <Content Include="Views\Orders\Details.cshtml" />
+    <Content Include="Views\Orders\ThankYou.cshtml" />
+    <Content Include="Views\Orders\Index.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Admin\HelloAdmin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -274,6 +352,29 @@
   <ItemGroup>
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201805312152339_AddBasketLine.resx">
+      <DependentUpon>201805312152339_AddBasketLine.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806011025133_addorders.resx">
+      <DependentUpon>201806011025133_addorders.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806011122225_updateorders.resx">
+      <DependentUpon>201806011122225_updateorders.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806011340553_updatecategory.resx">
+      <DependentUpon>201806011340553_updatecategory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806011344090_updateproduct.resx">
+      <DependentUpon>201806011344090_updateproduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806061019066_addadmin.resx">
+      <DependentUpon>201806061019066_addadmin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806061213134_updateadmin.resx">
+      <DependentUpon>201806061213134_updateadmin.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
